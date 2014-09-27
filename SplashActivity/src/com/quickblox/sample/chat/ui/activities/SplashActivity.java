@@ -3,6 +3,7 @@ package com.quickblox.sample.chat.ui.activities;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -20,6 +21,9 @@ public class SplashActivity extends Activity implements QBCallback {
     private static final String AUTH_SECRET = "SK4GwLAffgDSTd3";
 
     private ProgressBar progressBar;
+    SharedPreferences prefs;
+    SharedPreferences.Editor prefsEditor;
+    int extra=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,9 @@ public class SplashActivity extends Activity implements QBCallback {
 
         QBSettings.getInstance().fastConfigInit(APP_ID, AUTH_KEY, AUTH_SECRET);
         QBAuth.createSession(this);
+        if(prefs.getBoolean("isMatched",false)){
+            extra=prefs.getInt("pairID",0);
+        }
     }
 
     @Override
@@ -38,6 +45,7 @@ public class SplashActivity extends Activity implements QBCallback {
 
         if (result.isSuccess()) {
             Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("pairID",extra);
             startActivity(intent);
             finish();
         } else {

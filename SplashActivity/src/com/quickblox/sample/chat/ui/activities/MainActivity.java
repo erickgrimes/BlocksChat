@@ -17,6 +17,7 @@ import com.quickblox.module.chat.QBChatService;
 import com.quickblox.module.users.model.QBUser;
 import com.quickblox.sample.chat.App;
 import com.quickblox.sample.chat.R;
+import com.quickblox.sample.chat.core.SingleChat;
 import com.quickblox.sample.chat.ui.fragments.RoomsFragment;
 import com.quickblox.sample.chat.ui.fragments.UsersFragment;
 
@@ -34,14 +35,20 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     private ViewPager viewPager;
     private Action lastAction;
     private ConnectionListener connectionListener;
+    int pairID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        pairID=savedInstanceState.getInt("pairID");
 
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+        if(pairID!=0){
+            startChat();
+        }
 
         List<Fragment> tabs = new ArrayList<Fragment>();
         tabs.add(UsersFragment.getInstance());
@@ -63,6 +70,13 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             actionBar.addTab(actionBar.newTab().setText(sectionsPagerAdapter.getPageTitle(i)).setTabListener(
                     this));
         }
+    }
+
+    public void startChat(){
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(ChatActivity.EXTRA_MODE, ChatActivity.Mode.SINGLE);
+        bundle.putInt(SingleChat.EXTRA_USER_ID, pairID);
+        ChatActivity.start(this, bundle);
     }
 
     @Override
