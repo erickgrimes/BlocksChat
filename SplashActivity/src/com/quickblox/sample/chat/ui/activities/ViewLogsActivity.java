@@ -15,8 +15,9 @@ public class ViewLogsActivity extends Activity{
 
 	public void printLogs(String mentorName){
 		for(String thisString:ftp.pullLogsForMentor(mentorName)){
-			//print this string somehow lol
+			
 		}
 	}
-
+	//public void onCreate(Bundle listInstance){
+	//}
 }

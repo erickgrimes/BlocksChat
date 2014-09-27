@@ -1,0 +1,5 @@
+package com.quickblox.sample.chat.ui.activities;
+
+public class ViewLogsActivity {
+
+}

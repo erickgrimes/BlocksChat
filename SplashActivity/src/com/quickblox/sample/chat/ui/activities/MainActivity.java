@@ -43,7 +43,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         prefs = this.getSharedPreferences("imentor",this.MODE_PRIVATE);
-        boolean pairID=savedInstanceState.getBoolean("isPartner");
+        boolean pairID=prefs.getBoolean("isPartner",false);
 
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -109,14 +109,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
-            switch (lastAction) {
-                case CHAT:
-                    ((UsersFragment) sectionsPagerAdapter.getItem(POSITION_USER)).startChat();
-                    break;
-                case ROOM_LIST:
-                    viewPager.setCurrentItem(POSITION_ROOM);
-                    break;
-            }
+            ((UsersFragment) sectionsPagerAdapter.getItem(POSITION_USER)).startChat();
             connectionListener = new ChatConnectionListener();
             QBChatService.getInstance().addConnectionListener(connectionListener);
             ((RoomsFragment) sectionsPagerAdapter.getItem(POSITION_ROOM)).loadRooms();

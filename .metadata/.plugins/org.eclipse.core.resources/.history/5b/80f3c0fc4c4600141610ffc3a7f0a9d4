@@ -1,0 +1,18 @@
+package com.quickblox.sample.chat.ui.activities;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.ListView;
+import android.widget.Adapter;
+import android.support.v4.content.CursorLoader;
+import android.app.ListActivity;
+import android.widget.SimpleCursorAdapter;
+import android.support.v4.content.Loader;
+
+	
+public class ViewLogsActivity extends Activity{
+
+	
+
+
+}
