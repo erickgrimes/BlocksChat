@@ -1,0 +1,18 @@
+<component name="libraryTable">
+  <library name="dexedLibs">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/SplashActivity/bin/dexedLibs/pull-to-refresh-a3736ebdd1551f73691b4501969fac52.jar!/" />
+      <root url="jar://$PROJECT_DIR$/SplashActivity/bin/dexedLibs/android-support-v4-a13624a9f443772878591fd89e868d02.jar!/" />
+      <root url="jar://$PROJECT_DIR$/SplashActivity/bin/dexedLibs/android-support-v4-f4658cb79aebf70fe9278e32e4edbbc4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/SplashActivity/bin/dexedLibs/android-support-v7-appcompat-3dcc11167ca92d6390aba76c2a985e31.jar!/" />
+      <root url="jar://$PROJECT_DIR$/SplashActivity/bin/dexedLibs/pull-to-refresh-423f80647b2351eceef7f0d0a8a3171c.jar!/" />
+      <root url="jar://$PROJECT_DIR$/SplashActivity/bin/dexedLibs/android-support-v7-appcompat-ea36b35acb4fee7737959755fdc48246.jar!/" />
+      <root url="jar://$PROJECT_DIR$/SplashActivity/bin/dexedLibs/android-support-v7-appcompat-5534edf0b646617db2253d865d7e8cd4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/SplashActivity/bin/dexedLibs/quickblox-android-1.2.4-8706a222d352e64959b2c7d9d50159fe.jar!/" />
+      <root url="jar://$PROJECT_DIR$/SplashActivity/bin/dexedLibs/android-support-v7-appcompat-ba4ffe5242d9f42b513f0c5dbaf56b00.jar!/" />
+      <root url="jar://$PROJECT_DIR$/SplashActivity/bin/dexedLibs/quickblox-android-1.2.4-53e9090439fee8d68cbe7ddf866a9e5a.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
