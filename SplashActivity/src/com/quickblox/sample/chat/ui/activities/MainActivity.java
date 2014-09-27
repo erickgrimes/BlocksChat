@@ -14,6 +14,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.Toast;
 
+import com.additional.FileTransferComponent;
 import com.quickblox.module.chat.QBChatService;
 import com.quickblox.module.users.model.QBUser;
 import com.quickblox.sample.chat.App;
@@ -110,7 +111,12 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
+        	try{
             ((UsersFragment) sectionsPagerAdapter.getItem(POSITION_USER)).startChat();
+        	}
+        	catch(NullPointerException e){
+        		e.printStackTrace();
+        	}
             connectionListener = new ChatConnectionListener();
             QBChatService.getInstance().addConnectionListener(connectionListener);
             ((RoomsFragment) sectionsPagerAdapter.getItem(POSITION_ROOM)).loadRooms();

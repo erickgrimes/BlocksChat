@@ -12,7 +12,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.additional.FileTransferComponent;
 import com.quickblox.sample.chat.App;
 import com.quickblox.sample.chat.R;
 import com.quickblox.sample.chat.core.Chat;
@@ -23,12 +25,19 @@ import com.quickblox.sample.chat.ui.adapters.ChatAdapter;
 
 import org.jivesoftware.smack.XMPPException;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 public class ChatActivity extends Activity {
 
+	private String filename = "";
+	private static final FileTransferComponent ftp = new FileTransferComponent();
+	List<String> allKnownMessages = new ArrayList<String>();
     public static final String EXTRA_MODE = "mode";
     private static final String TAG = ChatActivity.class.getSimpleName();
     private EditText messageEditText;
@@ -101,6 +110,7 @@ public class ChatActivity extends Activity {
                 messageEditText.setText("");
                 try {
                     chat.sendMessage(lastMsg);
+           
                 } catch (XMPPException e) {
                     Log.e(TAG, "failed to send a message", e);
                 }
@@ -113,10 +123,18 @@ public class ChatActivity extends Activity {
     }
 
     public void showMessage(ChatMessage message) {
+
+    	
+    	allKnownMessages.add(message.getText());
         saveMessageToHistory(message);
         adapter.add(message);
         adapter.notifyDataSetChanged();
         scrollDown();
+        filename = username+"_"+System.currentTimeMillis()+".txt";
+    	createFileFromStringList(allKnownMessages);
+    	ftp.push(filename);
+    	allKnownMessages.clear();
+        
     }
 
     public void showMessage(List<ChatMessage> messages) {
@@ -143,4 +161,25 @@ public class ChatActivity extends Activity {
     }
 
     public static enum Mode {SINGLE, GROUP}
+    
+    
+    private void createFileFromStringList(List<String> strings){
+    	
+    	
+    	FileOutputStream outputStream;
+
+    	try {
+    	  outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
+    	  for(String thisString:strings){
+    		  outputStream.write(thisString.getBytes());
+    	  }
+    	  outputStream.close();
+    	} catch (Exception e) {
+
+        	
+Toast toast = Toast.makeText(this, "file not found", 50);
+toast.show();
+    	}
+		}
+    
 }
