@@ -72,7 +72,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             actionBar.addTab(actionBar.newTab().setText(sectionsPagerAdapter.getPageTitle(i)).setTabListener(
                     this));
         }
-
+        showUsersFragment();
         showAuthenticateDialog();
     }
 
@@ -119,7 +119,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             QBChatService.getInstance().addConnectionListener(connectionListener);
             ((RoomsFragment) sectionsPagerAdapter.getItem(POSITION_ROOM)).loadRooms();
         } else {
-            showUsersFragment();
+
         }
     }
 
