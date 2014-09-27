@@ -49,7 +49,6 @@ public class ChatActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-        username=savedInstanceState.getString("name");
         initViews();
     }
 
@@ -85,6 +84,7 @@ public class ChatActivity extends Activity {
             case SINGLE:
                 chat = new SingleChat(this);
                 int userId = intent.getIntExtra(SingleChat.EXTRA_USER_ID, 0);
+                username=intent.getStringExtra("name");
                 companionLabel.setText(username);
                 restoreMessagesFromHistory(userId);
                 break;
