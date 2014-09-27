@@ -85,7 +85,7 @@ public class ChatActivity extends Activity {
                 chat = new SingleChat(this);
                 int userId = intent.getIntExtra(SingleChat.EXTRA_USER_ID, 0);
                 username=intent.getStringExtra("name");
-                intent.getStringExtra("name")
+                intent.getStringExtra("name");
                 companionLabel.setText(username);
                 restoreMessagesFromHistory(userId);
                 break;

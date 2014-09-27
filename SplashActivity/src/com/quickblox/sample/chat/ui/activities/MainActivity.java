@@ -50,6 +50,8 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             startChat();
         }
 
+
+
         List<Fragment> tabs = new ArrayList<Fragment>();
         tabs.add(UsersFragment.getInstance());
         tabs.add(RoomsFragment.getInstance());
@@ -70,6 +72,8 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             actionBar.addTab(actionBar.newTab().setText(sectionsPagerAdapter.getPageTitle(i)).setTabListener(
                     this));
         }
+
+        showAuthenticateDialog();
     }
 
     public void startChat(){
@@ -87,7 +91,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             viewPager.setCurrentItem(position);
         } else if (position == POSITION_ROOM) {
             lastAction = Action.ROOM_LIST;
-            showAuthenticateDialog();
         }
     }
 
