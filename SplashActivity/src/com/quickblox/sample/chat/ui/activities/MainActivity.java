@@ -3,6 +3,7 @@ package com.quickblox.sample.chat.ui.activities;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -35,18 +36,19 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     private ViewPager viewPager;
     private Action lastAction;
     private ConnectionListener connectionListener;
-    int pairID;
+    SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        pairID=savedInstanceState.getInt("pairID");
+        prefs = this.getSharedPreferences("imentor",this.MODE_PRIVATE);
+        boolean pairID=savedInstanceState.getBoolean("isPartner");
 
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-        if(pairID!=0){
+        if(pairID){
             startChat();
         }
 
@@ -79,7 +81,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     public void startChat(){
         Bundle bundle = new Bundle();
         bundle.putSerializable(ChatActivity.EXTRA_MODE, ChatActivity.Mode.SINGLE);
-        bundle.putInt(SingleChat.EXTRA_USER_ID, pairID);
+        bundle.putInt(SingleChat.EXTRA_USER_ID, prefs.getInt("partner",0));
         ChatActivity.start(this, bundle);
     }
 

@@ -1,6 +1,7 @@
 package com.quickblox.sample.chat.ui.fragments;
 
 import android.app.AlertDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -37,6 +38,7 @@ public class UsersFragment extends Fragment implements QBCallback {
     private QBUser companionUser;
     private int listViewIndex;
     private int listViewTop;
+    SharedPreferences.Editor prefsEditor;
 
     public static UsersFragment getInstance() {
         return new UsersFragment();
@@ -58,6 +60,8 @@ public class UsersFragment extends Fragment implements QBCallback {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 companionUser = ((App)getActivity().getApplication()).getAllQbUsers().get(position-1);
+                prefsEditor=getActivity().getSharedPreferences("imentor",getActivity().MODE_PRIVATE).edit();
+                prefsEditor.putInt("tempPartner",companionUser.getId());
                 if (((App)getActivity().getApplication()).getQbUser() != null) {
                     startChat();
                 } else {
@@ -123,7 +127,7 @@ public class UsersFragment extends Fragment implements QBCallback {
     public void startChat() {
         Bundle bundle = new Bundle();
         bundle.putSerializable(ChatActivity.EXTRA_MODE, ChatActivity.Mode.SINGLE);
-        bundle.putString("name",companionUser.getLogin());
+        bundle.putString("name", companionUser.getLogin());
         bundle.putInt(SingleChat.EXTRA_USER_ID, companionUser.getId());
         ChatActivity.start(getActivity(), bundle);
     }

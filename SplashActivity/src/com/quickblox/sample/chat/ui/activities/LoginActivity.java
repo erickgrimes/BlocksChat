@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -34,6 +35,9 @@ public class LoginActivity extends Activity implements QBCallback, View.OnClickL
     private QBUser user;
     private SmackAndroid smackAndroid;
 
+    SharedPreferences prefs;
+    SharedPreferences.Editor prefsEditor;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +51,8 @@ public class LoginActivity extends Activity implements QBCallback, View.OnClickL
         loginButton.setOnClickListener(this);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading");
+        prefs = this.getSharedPreferences("imentor",this.MODE_PRIVATE);
+        prefsEditor = prefs.edit();
 
         smackAndroid = SmackAndroid.init(this);
     }
@@ -87,8 +93,14 @@ public class LoginActivity extends Activity implements QBCallback, View.OnClickL
                         progressDialog.dismiss();
                     }
                     Log.i(TAG, "success when login");
+                    prefsEditor.putBoolean("isSaved",true);
+                    prefsEditor.putString("username",loginEdit.toString());
+                    prefsEditor.putString("password",passwordEdit.toString());
+                    prefsEditor.putInt("partner",prefs.getInt("tempPartner",0));
+
 
                     Intent intent = new Intent();
+                    intent.putExtra("isPartnered",true);
                     setResult(RESULT_OK, intent);
                     finish();
                 }
