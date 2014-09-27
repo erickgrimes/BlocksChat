@@ -32,6 +32,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     private static final int AUTHENTICATION_REQUEST = 1;
     private static final int POSITION_USER = 0;
     private static final int POSITION_ROOM = 1;
+    public static final String IS_MENTOR = "ismentor";
     private SectionsPagerAdapter sectionsPagerAdapter;
     private ViewPager viewPager;
     private Action lastAction;
@@ -42,7 +43,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        prefs = this.getSharedPreferences("imentor",this.MODE_PRIVATE);
+        prefs = this.getSharedPreferences(IS_MENTOR,this.MODE_PRIVATE);
         boolean pairID=prefs.getBoolean("isSaved",false);
 
         final ActionBar actionBar = getSupportActionBar();
