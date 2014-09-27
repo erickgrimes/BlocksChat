@@ -12,7 +12,7 @@
         android:layout_gravity="center"
         android:longClickable="true"
         android:scaleType="fitXY"
-        android:src="@drawable/hdbg"
+        android:src="@drawable/sdbg"
         android:visibility="visible" />
 
 
