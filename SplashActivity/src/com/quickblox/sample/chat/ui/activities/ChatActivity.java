@@ -36,18 +36,20 @@ public class ChatActivity extends Activity {
     private Chat chat;
     private ChatAdapter adapter;
     private ListView messagesContainer;
+    String username;
 
     public static void start(Context context, Bundle bundle) {
         Intent intent = new Intent(context, ChatActivity.class);
         intent.putExtras(bundle);
         context.startActivity(intent);
+
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-
+        username=savedInstanceState.getString("name");
         initViews();
     }
 
@@ -83,7 +85,7 @@ public class ChatActivity extends Activity {
             case SINGLE:
                 chat = new SingleChat(this);
                 int userId = intent.getIntExtra(SingleChat.EXTRA_USER_ID, 0);
-                companionLabel.setText("user(id" + userId + ")");
+                companionLabel.setText(username);
                 restoreMessagesFromHistory(userId);
                 break;
         }
