@@ -43,7 +43,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         prefs = this.getSharedPreferences("imentor",this.MODE_PRIVATE);
-        boolean pairID=prefs.getBoolean("isPartner",false);
+        boolean pairID=prefs.getBoolean("isSaved",false);
 
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
