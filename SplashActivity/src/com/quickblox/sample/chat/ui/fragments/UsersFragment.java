@@ -127,7 +127,9 @@ public class UsersFragment extends Fragment implements QBCallback {
     public void startChat() {
         Bundle bundle = new Bundle();
         bundle.putSerializable(ChatActivity.EXTRA_MODE, ChatActivity.Mode.SINGLE);
-        bundle.putString("name", companionUser.getLogin());
+        if(companionUser!=null && companionUser.getLogin()!=null){
+        	bundle.putString("name", companionUser.getLogin());
+        }
         bundle.putInt(SingleChat.EXTRA_USER_ID, companionUser.getId());
         ChatActivity.start(getActivity(), bundle);
     }
