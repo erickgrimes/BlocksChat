@@ -47,6 +47,7 @@ public class SplashActivity extends Activity implements QBCallback {
 
             user = new QBUser(login, password);
             QBUsers.signIn(user, this);
+            prefsEditor.putInt("userid",user.getId());
         }
     }
 

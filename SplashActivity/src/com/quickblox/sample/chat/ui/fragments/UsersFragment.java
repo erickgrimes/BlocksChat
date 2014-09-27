@@ -39,6 +39,7 @@ public class UsersFragment extends Fragment implements QBCallback {
     private int listViewIndex;
     private int listViewTop;
     SharedPreferences.Editor prefsEditor;
+    SharedPreferences prefs = getActivity().getSharedPreferences("imentor",getActivity().MODE_PRIVATE);
 
     public static UsersFragment getInstance() {
         return new UsersFragment();
@@ -60,18 +61,19 @@ public class UsersFragment extends Fragment implements QBCallback {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 companionUser = ((App)getActivity().getApplication()).getAllQbUsers().get(position-1);
-                prefsEditor=getActivity().getSharedPreferences("imentor",getActivity().MODE_PRIVATE).edit();
-                prefsEditor.putInt("tempPartner",companionUser.getId());
-                if (((App)getActivity().getApplication()).getQbUser() != null) {
-                    startChat();
-                } else {
-                    MainActivity activity = (MainActivity) getActivity();
-                    activity.setLastAction(MainActivity.Action.CHAT);
-                    activity.showAuthenticateDialog();
-                }
-            }
+                if(companionUser.getId()!=1630100 &&(prefs.getInt("userid",0)!=1629650)) {
+                    prefsEditor = getActivity().getSharedPreferences("imentor", getActivity().MODE_PRIVATE).edit();
+                    prefsEditor.putInt("tempPartner", companionUser.getId());
+                    if (((App) getActivity().getApplication()).getQbUser() != null) {
+                        startChat();
+                    } else {
+                        MainActivity activity = (MainActivity) getActivity();
+                        activity.setLastAction(MainActivity.Action.CHAT);
+                        activity.showAuthenticateDialog();
+                    }
+                } }
         });
-        usersList.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
+       usersList.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
             public void onRefresh(PullToRefreshBase<ListView> refreshView) {
                 // Do work to refresh the list here.
